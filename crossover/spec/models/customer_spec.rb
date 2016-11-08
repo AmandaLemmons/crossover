@@ -12,7 +12,6 @@ RSpec.describe Customer, type: :model do
    end
 
    describe "validations" do
-     it { is_expected.to validate_presence_of(:id) }
      it { is_expected.to validate_presence_of(:firstname) }
      it { is_expected.to validate_presence_of(:lastname) }
      it { is_expected.to validate_presence_of(:email) }
