@@ -11,19 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108114735) do
+ActiveRecord::Schema.define(version: 20161108185836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authentication_tokens", force: :cascade do |t|
+    t.string   "body"
+    t.integer  "customer_id"
+    t.datetime "last_used_at"
+    t.string   "ip_address"
+    t.string   "customer_agent"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "authentication_tokens", ["customer_id"], name: "index_authentication_tokens_on_customer_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "password_digest"
+    t.string   "password_confirmation"
   end
+
+  add_index "customers", ["email"], name: "index_customers_on_email", using: :btree
 
   create_table "order_lines", force: :cascade do |t|
     t.integer  "order_id"
@@ -53,4 +69,5 @@ ActiveRecord::Schema.define(version: 20161108114735) do
     t.datetime "updated_at",  null: false
   end
 
+  add_foreign_key "authentication_tokens", "customers"
 end

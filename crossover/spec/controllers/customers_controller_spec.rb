@@ -1,6 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe CustomersController, type: :controller do
+
+  it_behaves_like "api_controller"
+
+  describe "secure password" do
+    it { is_expected.to have_secure_password }
+    it { is_expected.to validate_length_of(:password) }
+
+    it { expect(Customer.new({ email: "user@email.com", password: nil }).save).to be_falsey }
+    it { expect(Customer.new({ email: "user@email.com", password: "foo" }).save).to be_falsey }
+    it { expect(Customer.new({ email: "user@email.com", password: "af3714ff0ffae" }).save).to be_truthy }
+  end
+
   let(:valid_attributes) {
     { firstname: "John", lastname: "Doe", email: "john.doe@example.com", password: "123456789" }
   }
