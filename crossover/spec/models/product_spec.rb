@@ -17,6 +17,10 @@ RSpec.describe Product, type: :model do
      it { is_expected.to validate_presence_of(:price) }
      it { is_expected.to validate_presence_of(:status) }
      it { is_expected.to validate_presence_of(:name) }
+   end
+
+   describe "associations" do
+     it { should have_many(:order_lines) }
 
    end
  end

@@ -17,6 +17,10 @@ RSpec.describe Customer, type: :model do
      it { is_expected.to validate_presence_of(:lastname) }
      it { is_expected.to validate_presence_of(:email) }
      it { is_expected.to validate_presence_of(:password) }
+   end
+
+   describe "associations" do
+     it { should have_many(:orders) }
 
    end
  end

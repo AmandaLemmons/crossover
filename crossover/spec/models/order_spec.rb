@@ -10,4 +10,10 @@ RSpec.describe Order, type: :model do
      it { is_expected.to have_db_column(:created_at).of_type(:datetime) }
      it { is_expected.to have_db_column(:updated_at).of_type(:datetime) }
    end
+
+   describe "associations" do
+     it { should have_many(:order_lines) }
+     it { should belong_to(:customer) }
+
+   end
  end

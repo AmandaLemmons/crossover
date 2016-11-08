@@ -1,5 +1,6 @@
 class Customer < ActiveRecord::Base
-  belongs_to :order
+  has_many :orders
+  belongs_to :product
   validates_presence_of :firstname
   validates_presence_of :lastname
   validates_presence_of :email

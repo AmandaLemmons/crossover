@@ -1,3 +1,4 @@
 class Order < ActiveRecord::Base
-  has_one :customer
+  belongs_to :customer
+  has_many :order_lines
 end
